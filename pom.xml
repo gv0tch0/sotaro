@@ -5,7 +5,7 @@
   <groupId>io.github.gv0tch0.sotaro</groupId>
   <artifactId>sotaro</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
+  <packaging>war</packaging>
   <name>sotaro</name>
   <description>Spring cOntent negoTiation And maRshalling tOy.</description>
   <url>https://github.com/gv0tch0/sotaro</url>
@@ -58,6 +58,25 @@
       </plugin>
 
       <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jaxb2-maven-plugin</artifactId>
+        <version>1.6</version>
+        <configuration>
+          <schemaDirectory>${project.basedir}/src/main/resources</schemaDirectory>
+          <outputDirectory>${project.build.directory}/generated-sources</outputDirectory>
+          <packageName>io.github.gv0tch0.sotaro</packageName>
+        </configuration>
+        <executions>
+          <execution>
+            <id>xjc</id>
+            <goals>
+              <goal>xjc</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.1</version>
@@ -92,6 +111,12 @@
         <artifactId>spring-webmvc</artifactId>
         <version>${spring.version}</version>
       </dependency>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.11</version>
+        <scope>test</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
 
@@ -103,6 +128,10 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
     </dependency>
   </dependencies>
 

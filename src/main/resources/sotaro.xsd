@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="urn:io:github:gv0tch0:sotaro"
+           targetNamespace="urn:io:github:gv0tch0:sotaro"
+           version="0.0.1">
+
+  <xs:element name="say" type="tns:SayWhat" />
+  
+  <xs:complexType name="SayWhat">
+    <xs:sequence>
+      <xs:element name="what" type="xs:string" minOccurs="1" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+
