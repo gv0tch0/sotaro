@@ -2,7 +2,7 @@
 
 ### Motivation
 
-I have been having a hard time trying to get XML negotiation and marshalling over HTTP working for a service that uses [Spring Web MVC](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html). This project contains a toy example that exemplifies the problem paired with an ask on StackOverflow (coming up) hoping that someone can solve the problem for me.
+I have been having a hard time trying to get XML negotiation and marshalling over HTTP working for a service that uses [Spring Web MVC](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html). This project contains a toy example that exemplifies the problem paired with an ask on [StackOverflow](http://stackoverflow.com/questions/24040084) hoping that someone can solve the problem for me.
 
 When this toy example is built and run (see below for HOWTO) the "service" responds with a 406 Not Acceptable to requests that ask for XML content back. I have tried a number of different Spring configurations (using Spring 4, 4.0.5 at the time of writing) as evident by the number of tryX.ctx.xml files [here](ihttps://github.com/gv0tch0/sotaro/tree/master/src/main/resources/io/github/gv0tch0/sotaro).
 
