@@ -7,7 +7,7 @@ I have been having a hard time trying to get XML negotiation and marshalling ove
 When this toy example is built and run (see below for HOWTO) the "service" responds with a 406 Not Acceptable to requests that ask for XML content back. I have tried a number of different Spring configurations (using Spring 4, 4.0.5 at the time of writing) as evident by the number of tryX.ctx.xml files [here](ihttps://github.com/gv0tch0/sotaro/tree/master/src/main/resources/io/github/gv0tch0/sotaro).
 
 Here is a example of a request/response cycle (some of the output has been omitted for brevity).
-
+```
   [...]$ curl -v -X GET -H "Accept: application/xml" http://localhost:8080/sotaro/say/boo | tidy -ashtml -utf8 --indent yes
   * Connected to localhost (::1) port 8080 (#0)
   > GET /sotaro/say/boo HTTP/1.1
@@ -30,6 +30,7 @@ Here is a example of a request/response cycle (some of the output has been omitt
       <p><b>description</b> <u>The resource identified by this request is only capable of generating responses with characteristics not acceptable according to the request "accept" headers.</u></p>
     </body>
   </html>
+```
 
 ### Solution Constraints
 
