@@ -1,4 +1,4 @@
-## Spring cOntent negoTiation And maRshalling tOy.
+## Spring cOntent negoTiation And maRshalling tOy [![Build Status](https://travis-ci.org/gv0tch0/sotaro.png?branch=master)](https://travis-ci.org/gv0tch0/sotaro)
 
 ### Motivation
 
