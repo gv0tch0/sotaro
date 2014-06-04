@@ -8,14 +8,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/say")
 public class Say {
-  @RequestMapping(
-      value = "/{what}", 
-      produces = {MediaType.APPLICATION_XML_VALUE}, 
-      method = RequestMethod.GET)
-  @ResponseBody
-  public SayWhat say(@PathVariable("what") String what) {
+  @RequestMapping(value = "/say/{what}", 
+                  produces = {MediaType.APPLICATION_XML_VALUE}, 
+                  method = RequestMethod.GET)
+  public @ResponseBody SayWhat say(@PathVariable("what") String what) {
     return echo(what);
   }
   

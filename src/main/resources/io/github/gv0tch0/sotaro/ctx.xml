@@ -16,11 +16,23 @@
   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
   http://www.springframework.org/schema/oxm http://www.springframework.org/schema/oxm/spring-oxm-4.0.xsd">
 
-  <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager" >
+  <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
     <mvc:message-converters register-defaults="false">
-      <ref bean="xmlConverter"/>
+      <ref bean="xmlConverter" />
     </mvc:message-converters>
   </mvc:annotation-driven>
+
+  <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+    <property name="favorPathExtension" value="false" />
+    <property name="ignoreAcceptHeader" value="false" />
+    <property name="useJaf" value="false" />
+    <property name="defaultContentType" value="application/xml" />
+    <property name="mediaTypes">
+      <map>
+        <entry key="xml" value="application/xml" />
+      </map>
+    </property>
+  </bean>
 
   <bean id="xmlConverter" class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
     <constructor-arg ref="jaxbMarshaller" />
