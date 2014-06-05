@@ -36,12 +36,9 @@
   </bean>
 
   <bean id="jaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
-    <property name="supportJaxbElementClass" value="true"/>
-    <property name="packagesToScan">
-      <list>
-        <value>io.github.gv0tch0.sotaro</value>
-      </list>
-    </property>
+    <property name="supportJaxbElementClass" value="true" />
+    <property name="checkForXmlRootElement" value="false" />
+    <property name="contextPath" value="io.github.gv0tch0.sotaro" />
   </bean>
 
   <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
