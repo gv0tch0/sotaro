@@ -2,11 +2,11 @@
 
 ### Motivation
 
-I have been having a hard time trying to get XML negotiation and marshalling over HTTP working for a service that uses [Spring Web MVC](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html). This project contains a toy example that exemplifies the problem paired with an ask on [StackOverflow](http://stackoverflow.com/questions/24040084) hoping that someone can solve the problem for me.
+I was having a hard time trying to get XML negotiation and marshalling over HTTP working for a service that uses [Spring Web MVC](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html). This project contains a toy example that exemplified the problem and supported an ask on [StackOverflow](http://stackoverflow.com/questions/24040084) hoping that someone can solve the problem for me.
 
-When this toy example is built and run (see below for HOWTO) the "service" responds with a 406 Not Acceptable to requests that ask for XML content back. I have tried a number of different Spring configurations (using Spring 4, 4.0.5 at the time of writing) as evident by the number of tryX.ctx.xml files [here](ihttps://github.com/gv0tch0/sotaro/tree/master/src/main/resources/io/github/gv0tch0/sotaro).
+It used to be the case that when this toy example was built and run (see below for HOWTO) the "service" responded with a 406 Not Acceptable to requests that asked for XML content back.
 
-Here is a example of a request/response cycle (some of the output has been omitted for brevity).
+Here is a example of a problematic request/response cycle (some of the output has been omitted for brevity).
 ```
   [...]$ curl -v -X GET -H "Accept: application/xml" http://localhost:8080/sotaro/say/boo | tidy -ashtml -utf8 --indent yes
   * Connected to localhost (::1) port 8080 (#0)
@@ -31,6 +31,10 @@ Here is a example of a request/response cycle (some of the output has been omitt
     </body>
   </html>
 ```
+
+Since then I have been able to solve the issue by retrning response objects wrapped in `JAXBElement`s and configuring the JAXB marshaller to accept and marshal `JAXBElement`s.
+
+The project continues to support more involved content scenarios. E.g. adding support for JSON, etc.
 
 ### Solution Constraints
 
