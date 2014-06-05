@@ -14,7 +14,7 @@ public class Say {
   private final static ObjectFactory JAXB_FACTORY = new ObjectFactory();
 
   @RequestMapping(value = "/say/{what}", 
-                  produces = {MediaType.APPLICATION_XML_VALUE}, 
+                  produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}, 
                   method = RequestMethod.GET)
   public @ResponseBody JAXBElement<SayWhat> say(@PathVariable("what") String what) {
     return echo(what);

@@ -43,13 +43,20 @@
 
   <bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
     <property name="objectMapper" ref="jacksonMapper" />
-    <property name="supportedMediaTypes" value="application/json" />
+    <property name="supportedMediaTypes">
+      <list>
+        <bean class="org.springframework.http.MediaType">
+          <constructor-arg index="0" value="application" />
+          <constructor-arg index="1" value="json" />
+        </bean>
+      </list>
+    </property>
   </bean>
 
-  <bean id="jaxbInspector" class="com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector" />
+  <bean id="jaxbAnnotationInspector" class="com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector" />
 
   <bean id="jacksonMapper" class="com.fasterxml.jackson.databind.ObjectMapper">
-    <property name="annotationIntrospector" ref="jaxbInspector" />
+    <property name="annotationIntrospector" ref="jaxbAnnotationInspector" />
   </bean>
 
   <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
