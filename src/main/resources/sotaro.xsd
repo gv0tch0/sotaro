@@ -9,6 +9,7 @@
   <xs:complexType name="SayWhat">
     <xs:sequence>
       <xs:element name="what" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="when" type="xs:dateTime" minOccurs="1" maxOccurs="1" />
     </xs:sequence>
   </xs:complexType>
 
