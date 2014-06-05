@@ -46,10 +46,7 @@
     <property name="supportedMediaTypes" value="application/json" />
   </bean>
 
-  <bean id="jaxbInspector" class="com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector" />
-
   <bean id="jacksonMapper" class="com.fasterxml.jackson.databind.ObjectMapper">
-    <property name="annotationIntrospector" ref="jaxbInspector" />
     <property name="dateFormat">
       <bean class="java.text.SimpleDateFormat">
         <constructor-arg type="java.lang.String" value="yyyy-MM-dd'T'HH:mm:ss'Z'" />
