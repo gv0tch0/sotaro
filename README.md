@@ -1,7 +1,7 @@
 ## Spring cOntent negoTiation And maRshalling tOy [![Build Status](https://travis-ci.org/gv0tch0/sotaro.png?branch=master)](https://travis-ci.org/gv0tch0/sotaro)
 
 
-### What is it? What is it:
+### What is it? What is it?
 
 Showcases a project that:
 - Uses solely Spring (currently v4.0.5) for content negotiation and marshaling.
