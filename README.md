@@ -1,5 +1,15 @@
 ## Spring cOntent negoTiation And maRshalling tOy [![Build Status](https://travis-ci.org/gv0tch0/sotaro.png?branch=master)](https://travis-ci.org/gv0tch0/sotaro)
 
+
+### What is it? What is it:
+
+Showcases a project that:
+- Uses solely Spring (currently v4.0.5) for content negotiation and marshaling.
+- Uses JAXB to generate the object representation of the responses.
+- Supports both XML and JSON content negotiation.
+- Honors the JAXB annotations when marshaling JSON responses.
+- Avoids leaking the `JAXBElement`-wrapper around the response object.
+
 ### Motivation
 
 I was having a hard time trying to get XML negotiation and marshalling over HTTP working for a service that uses [Spring Web MVC](http://docs.spring.io/spring/docs/current/spring-framework-reference/html/mvc.html). This project contains a toy example that exemplified the problem and supported an ask on [StackOverflow](http://stackoverflow.com/questions/24040084) hoping that someone can solve the problem for me.
