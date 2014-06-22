@@ -31,22 +31,30 @@
     </property>
   </bean>
 
-  <bean id="xmlConverter" class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
-    <constructor-arg ref="jaxbMarshaller" />
-    <property name="supportedMediaTypes" value="application/xml" />
+  <bean id="typeFactory" class="com.fasterxml.jackson.databind.type.TypeFactory" factory-method="defaultInstance" />
+
+  <bean id="jaxbIntrospector" class="com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector">
+    <constructor-arg ref="typeFactory" />
   </bean>
 
-  <bean id="jaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
-    <property name="supportJaxbElementClass" value="true" />
-    <property name="contextPath" value="io.github.gv0tch0.sotaro" />
-  </bean>
+  <bean id="jacksonIntrospector" class="com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector" />
 
-  <bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-    <property name="objectMapper" ref="jacksonMapper" />
-    <property name="supportedMediaTypes" value="application/json" />
+  <bean id="annotationIntrospector" class="com.fasterxml.jackson.databind.introspect.AnnotationIntrospectorPair">
+    <!-- Note that in order to get the best of both the JAXB annotation instrospector and the Mixin configuration
+         the JAXB introspector needs to be the primary introspector, hence it needs to stay at position 0. -->
+    <constructor-arg index="0" ref="jaxbIntrospector" />
+    <constructor-arg index="1" ref="jacksonIntrospector" />
   </bean>
 
   <bean id="jacksonMapper" class="com.fasterxml.jackson.databind.ObjectMapper">
+    <property name="annotationIntrospector" ref="annotationIntrospector" />
+    <!-- The mixin ensures that when JAXBElement wrapped responses are marshalled as JSON the
+         JAXBElement "envelope" gets discarded (which makes our JSON responses conform to spec). -->
+    <property name="mixInAnnotations">
+      <map key-type="java.lang.Class" value-type="java.lang.Class">
+        <entry key="javax.xml.bind.JAXBElement" value="io.github.gv0tch0.sotaro.JaxbElementMixin" />
+      </map>
+    </property>
     <property name="dateFormat">
       <bean class="java.text.SimpleDateFormat">
         <constructor-arg type="java.lang.String" value="yyyy-MM-dd'T'HH:mm:ss'Z'" />
@@ -57,6 +65,21 @@
         </property>
       </bean>
     </property>
+  </bean>
+
+  <bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+    <property name="objectMapper" ref="jacksonMapper" />
+    <property name="supportedMediaTypes" value="application/json" />
+  </bean>
+
+  <bean id="jaxbMarshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+    <property name="supportJaxbElementClass" value="true" />
+    <property name="contextPath" value="io.github.gv0tch0.sotaro" />
+  </bean>
+
+  <bean id="xmlConverter" class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+    <constructor-arg ref="jaxbMarshaller" />
+    <property name="supportedMediaTypes" value="application/xml" />
   </bean>
 
   <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
